@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<link type="text/css" href="css/main.css" rel="stylesheet" media="screen" />
+	<!--翻书相册样式-->
+	<style>
+    	.hovertreeinfo{text-align:center;}
+    </style>
+<!--背景音乐-->
+<!--<embed src="images/刘若英 - 后来 (铃声).mp3" hidden="true" autostart="true">
+</embed>
+-->
+<style type="text/css">
+.eyes{
+perspective: 1000px;
+}
+.box{
+/*设置3D效果*/
+transform-style: preserve-3d;
+/*盒子的大小*/
+width: 200px;
+height: 200px;
+background: #000000;
+/*设置盒子的位置，便于观察*/
+margin: 10% auto;
+/*复合方式设置动画 三者分别为：动画名 执行一次时间 执行方式*/
+animation: zhuan 15s ease;
+/*令动画无限执行下去*/
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+	
+	/*这个标签里面加一个背景图，展开六边形的时候，就不会有空白*/ 
+	background-image: url(images/1.jpg);
+	background-size: 100% 100%; 
+} 
+	/*旋转相册的移动端适配*/
+	@media (min-width: 300px) and (max-width: 1024px){
+		.box{
+			margin:60% auto !important;
+		}
+	} 
+.box div{
+width: 200px;
+height: 200px;
+opacity: 1;
+/*设置过渡*/
+transition: all 3s ease 0s;
+position: absolute;
+}
+/*调整位置，制作成一个六边形*/
+.box .div1{
+background: green;
+transform: translateZ(100px);
+}
+.box .div2{
+background: green;
+transform: translateZ(-100px);
+}
+.box .div3{
+background: green;
+transform: rotateX(90deg) translateZ(100px);
+}
+.box .div4{
+background: green;
+transform: rotateX(270deg) translateZ(100px);
+}
+.box .div5{
+background: green;
+transform: rotateY(-90deg) translateZ(100px);
+}
+.box .div6{
+background: green;
+transform: rotateY(90deg) translateZ(100px);
+}
+/*添加3D旋转效果 让其绕X、Y轴同时旋转90度*/
+@keyframes zhuan{
+from{
+transform: rotateX(0deg) rotateZ(0deg) rotateY(0deg);
+}
+to{
+transform: rotateX(360deg) rotateZ(360deg) rotateY(360deg);
+}
+}
+/*给正方体添加一个hover效果*/
+.box:hover .div1{
+transform: translateZ(200px);
+}
+.box:hover .div2{
+transform: translateZ(-200px);
+}
+.box:hover .div3{
+transform: rotateX(90deg) translateZ(200px);
+}
+.box:hover .div4{
+transform: rotateX(270deg) translateZ(200px);
+}
+.box:hover .div5{
+transform: rotateY(-90deg) translateZ(200px);
+}
+.box:hover .div6{
+transform: rotateY(90deg) translateZ(200px)
+}
+/*背景图片*/
+#web_bg{ 
+  position:fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  min-width: 1000px;
+  z-index:-10;
+  zoom: 1;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0; 
+}
+/*mv video标签的样式*/
+@media (min-width: 300px) and (max-width: 1024px) {
+	video{
+		width: 80% !important;
+	}
+}
+</style>
+</head>
+<body>
+	<!--autoplay 是渲染完成后，自动播放mv    preload标签：可以实现缓冲前，大家不至于看的那么卡。-->
+	<video src="images/于文文-体面 (《前任3：再见前任》电影插曲)(超清).mp4" autoplay preload  
+		style="width:28%; position: fixed; left: 0; right: 0; bottom: 0; margin: auto;">
+	 	您的浏览器不支持video标签
+	</video>
+		<!--相册背景图-->
+	 	<div id="web_bg" style="background-image:  url(images/3D相册背景图1.jpg);"> </div>
+<div class="eyes">
+<div class="box" style="margin-left: 15%;">
+<div class="div1"><img src="images/7.jpg" width="100%" height="100%"></div>
+<div class="div2"><img src="images/2.jpg" width="100%" height="100%"></div>
+<div class="div3"><img src="images/3.jpg" width="100%" height="100%"></div>
+<div class="div4"><img src="images/4.jpg" width="100%" height="100%"></div>
+<div class="div5"><img src="images/5.jpg" width="100%" height="100%" ></div>
+<div class="div6"><img src="images/6.jpg" width="100%" height="100%" ></div>
+</div>
+</div> 
+
+<!--翻书相册代码-->
+<div>
+	<div id="shineflip">
+	<div id="shineflip-pages">
+		<canvas id="shineflip-canvas"></canvas>
+		<canvas id="shineflip-page-mid-canvas"></canvas>
+		<section class="page">
+			<div><img src="images/0_1.jpg" width="400" height="400" /></div>
+			<span style="left:18px;"><img src="images/zh.png" height="425" /></span> 
+		</section>
+		<section class="page" style="background:url(images/left_pk.jpg)">
+			<div><img src="images/i_1.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_2.jpg" width="400" height="400" style="float:left;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_3.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page" style="background:url(images/right_pk.jpg)">
+			<div><img src="images/i_4.jpg" width="400" height="400" style="float:left;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_5.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page" style="background:url(images/right_pk.jpg)">
+			<div><img src="images/i_6.jpg" width="400" height="400" style="float:left;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_7.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_8.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_9.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section> 
+		<section class="page">
+			<div><img src="images/i_11.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_12.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_13.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_14.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_15.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_16.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_17.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_18.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/2.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/3.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/1.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section>
+		<section class="page">
+			<div><img src="images/i_19.jpg" width="400" height="400" style="float:right;margin-top:9px;" /></div>
+		</section> 
+		<section class="page" style="background:url(images/right_pk.jpg)">
+			<div><img src="images/7.jpg" width="400" height="400" style="float:left;margin-top:9px;" /></div>
+		</section> 
+		<section class="page">
+			<div><img src="images/24.jpg" width="400" height="400" /></div>
+			<span style="right:18px;"><img src="images/zh.png" height="400" /></span> 
+		</section>
+		
+		
+	</div>
+</div>
+
+</div>
+<!--翻书js代码-->
+<script type="text/javascript" src="js/shineflip_min.js"></script>
+<script type="text/javascript">
+var shineFlip = new ShineFlip({
+	// autoFitScreen: true,
+	width: 750,
+	height: 482,
+	page_width: 400,
+	page_height: 400
+});
+</script>
+</body>
+</html>
+ <!--
+ 	我要一张素一点的背景图片，，，然后我把照片通过美图秀秀拼接在这张背景图片上..
+ 	第一个试试在背景图片上面拼接十张图片或者八张
+ 	背景图，用风景照
+ 	素材:http://www.win4000.com/
+ 	最少需要2个3D动态相册..
+ 	
+ -->
